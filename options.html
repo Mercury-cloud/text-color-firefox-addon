@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Options</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous" />
+    <script src="jquery.js"></script>
+    <style>
+        #option_title {
+            font-size: 20px;
+        }
+        
+        .dom-check:hover {
+            cursor: pointer;
+        }
+        
+        .input-group-append:hover {
+            cursor: pointer;
+        }
+        
+        .one-row {
+            display: flex;
+            margin-bottom: 5px;
+        }
+        
+        .common-cell {
+            width: 50px;
+            margin-right: 3em;
+            margin-top: auto;
+            margin-bottom: auto;
+            text-align: center;
+        }
+        
+        .button-container {
+            padding: 2em;
+        }
+        
+        .save-btn:active {
+            opacity: 0.6;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <br />
+        <br />
+        <label id="option_title">Please select the HTML DOMs that will be colorized!</label>
+        <div class="checkbox-container d-flex">
+        </div>
+        <div class="input-group my-3">
+            <input type="text" class="form-control DOM-input" placeholder="please enter a DOM name that you want to colorize." aria-label="please enter a DOM name that you want to colorize." aria-describedby="add-btn">
+            <div class="input-group-append">
+                <span class="input-group-text" id="add_btn">Add DOM</span>
+            </div>
+        </div>
+        <hr />
+        <div class="letter-color-pair">
+            <label id="option_title">Select the color for each letter</label>
+            <div class="one-row">
+                <label class="common-cell">Letter</label>
+                <label class="common-cell">On</label>
+                <label class="common-cell">Color</label>
+            </div>
+            <!-- <div class="one-row">
+                <label class="common-cell">a</label>
+                <input class="common-cell" type="checkbox">
+                <input class="common-cell" type="color">
+            </div> -->
+        </div>
+        <div class="button-container">
+            <button class="btn btn-primary save-btn">Save Options</button>
+        </div>
+    </div>
+    <script src="options.js"></script>
+</body>
+
+</html>
