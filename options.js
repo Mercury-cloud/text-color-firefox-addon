@@ -1,7 +1,7 @@
 const domArray = ['h1', 'h2', 'h3', 'h4', 'h5', 'p', 'label', 'span', 'li'];
 let currentArray = [];
 window.onload = () => {
-    chrome.storage.sync.get("domArray", function(res) {
+    browser.storage.sync.get("domArray", function(res) {
         const arrayData = res.domArray ? res.domArray : domArray;
         currentArray = arrayData;
         for (let i = 0; i < arrayData.length; i++) {
@@ -13,7 +13,7 @@ window.onload = () => {
         }
     });
 
-    chrome.storage.sync.get("colorSet", function(res) {
+    browser.storage.sync.get("colorSet", function(res) {
         const colorSet = res.colorSet ? res.colorSet : [];
         for (let i = 0; i <= 25; i++) {
             const newPair = $('<div></div>').addClass('one-row').html(`<label class="common-cell" id="label_${i}">${String.fromCharCode(i + 65)}</label>`);
@@ -23,7 +23,7 @@ window.onload = () => {
         }
     });
 
-    chrome.storage.sync.get("colorizableDOMs", function(res) {
+    browser.storage.sync.get("colorizableDOMs", function(res) {
         if (res.colorizableDOMs) {
             for (let i = 0; i < res.colorizableDOMs.length; i++) {
                 const element = res.colorizableDOMs[i];
@@ -44,12 +44,12 @@ window.onload = () => {
         for (let i = 0; i <= 25; i++) {
             colorSet.push({ on: $(`#check_${i}`)[0].checked, color: $(`#color_${i}`).val() });
         }
-        chrome.storage.sync.set({ colorizableDOMs, colorSet }, function() {
+        browser.storage.sync.set({ colorizableDOMs, colorSet }, function() {
             console.log("stored colorizableDOMs--", colorizableDOMs)
             console.log("stored colorSet--", colorSet)
-            chrome.tabs.getAllInWindow(null, function(tabs) {
+            browser.tabs.query({ currentWindow: true }, function(tabs) {
                 for (let i = 0; i < tabs.length; i++) {
-                    chrome.tabs.sendMessage(tabs[i].id, { message: "dom_changed" });
+                    browser.tabs.sendMessage(tabs[i].id, { message: "dom_changed" });
                 }
             });
         });
@@ -59,7 +59,7 @@ window.onload = () => {
         if (evt.key == 'Enter') {
             const element = $('.DOM-input').val();
             currentArray.push(element);
-            chrome.storage.sync.set({ domArray: currentArray }, function() {
+            browser.storage.sync.set({ domArray: currentArray }, function() {
                 const newCheck = $('<div></div>').addClass('checkbox-element').html(
                     `<input type="checkbox" class="dom-check" id="check_${element}"><label for="check_${element}" class="ml-2">${element}</label>`
                 );
@@ -72,7 +72,7 @@ window.onload = () => {
     $('#add_btn').on('click', function() {
         const element = $('.DOM-input').val();
         currentArray.push(element);
-        chrome.storage.sync.set({ domArray: currentArray }, function() {
+        browser.storage.sync.set({ domArray: currentArray }, function() {
             const newCheck = $('<div></div>').addClass('checkbox-element').html(
                 `<input type="checkbox" class="dom-check" id="check_${element}"><label for="check_${element}" class="ml-2">${element}</label>`
             );

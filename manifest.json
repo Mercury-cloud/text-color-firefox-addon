@@ -27,5 +27,11 @@
          "48": "images/get_started48.png",
          "128": "images/get_started128.png"
      },
+     "applications": {
+         "gecko": {
+             "id": "blahblah@blah",
+             "strict_min_version": "52.0"
+         }
+     },
      "manifest_version": 2
  }
